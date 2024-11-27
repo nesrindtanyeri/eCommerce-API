@@ -1,24 +1,24 @@
 import express from 'express';
-import { getUsers, getUserById, createUser, updateUser, deleteUser } from '../controllers/users.js';
-import validate from '../middleware/validate.js';
-import { userSchema } from '../schemas/userSchemas.js';
+import { getUsers, getUserById, createUser, updateUser, deleteUser, loginUser } from '../controllers/users.js';
 
 const router = express.Router();
 
-// Kullanıcı listesi
+// Login user
+router.post('/login', loginUser);
+
+// Get all users
 router.get('/', getUsers);
 
-// Belirli bir kullanıcıyı getirme
+// Get user by ID
 router.get('/:id', getUserById);
 
-// Yeni kullanıcı oluşturma
-router.post('/', validate(userSchema), createUser);
+// Create a new user
+router.post('/', createUser);
 
-// Kullanıcıyı güncelleme
-router.put('/:id', validate(userSchema), updateUser);
+// Update a user
+router.put('/:id', updateUser);
 
-// Kullanıcıyı silme
+// Delete a user
 router.delete('/:id', deleteUser);
 
 export default router;
-

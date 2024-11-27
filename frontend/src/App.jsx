@@ -9,27 +9,27 @@ const App = () => {
   return (
     <Router>
       <div className="container mx-auto p-4">
-        {/* Üst Menü */}
+        {/* Top Menu */}
         <nav className="navbar bg-base-100 shadow-lg rounded-lg mb-8">
           <div className="flex-1">
-            <Link to="/" className="btn btn-ghost normal-case text-xl text-primary">Ana Sayfa</Link>
+            <Link to="/" className="btn btn-ghost normal-case text-xl text-primary">Home</Link>
           </div>
           <div className="flex-none">
             <ul className="menu menu-horizontal p-0 space-x-4">
               <li>
-                <Link to="/create-user" className="btn bg-secondary text-white">Kullanıcı Oluştur</Link>
+                <Link to="/create-user" className="btn bg-secondary text-white">Create User</Link>
               </li>
               <li>
-                <Link to="/user-list" className="btn bg-accent text-white">Kullanıcı Listesi</Link>
+                <Link to="/user-list" className="btn bg-accent text-white">User List</Link>
               </li>
               <li>
-                <Link to="/create-product" className="btn bg-neutral text-white">Ürün Oluştur</Link>
+                <Link to="/create-product" className="btn bg-neutral text-white">Create Product</Link>
               </li>
             </ul>
           </div>
         </nav>
 
-        {/* Rotalar */}
+        {/* Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create-user" element={<CreateUser />} />

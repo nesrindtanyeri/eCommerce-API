@@ -1,24 +1,21 @@
 import express from 'express';
 import { getProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/products.js';
-import validate from '../middleware/validate.js';
-import { productSchema } from '../schemas/productSchemas.js';
 
 const router = express.Router();
 
-// Ürün listesi
+// Product list
 router.get('/', getProducts);
 
-// ID'ye göre ürün getirme
+// Get product by ID
 router.get('/:id', getProductById);
 
-// Yeni ürün oluşturma (validation middleware kullanılarak)
-router.post('/', validate(productSchema), createProduct);
+// Create a new product
+router.post('/', createProduct);
 
-// Mevcut ürünü güncelleme (validation middleware kullanılarak)
-router.put('/:id', validate(productSchema), updateProduct);
+// Update an existing product
+router.put('/:id', updateProduct);
 
-// Ürünü silme
+// Delete a product
 router.delete('/:id', deleteProduct);
 
 export default router;
-
