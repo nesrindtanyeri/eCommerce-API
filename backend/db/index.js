@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
   }
 );
 
-// Bağlantıyı test etme
+// connect to the database
 sequelize
   .authenticate()
   .then(() => {
