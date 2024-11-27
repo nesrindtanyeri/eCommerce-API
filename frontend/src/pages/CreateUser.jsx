@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateUser = () => {
   const [name, setName] = useState('');
@@ -10,9 +12,9 @@ const CreateUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Boş alanları kontrol et
+    // Empty fields check
     if (!name || !email || !password) {
-      alert('Tüm alanları doldurmanız gerekmektedir.');
+      toast.error('All fields are required.');
       return;
     }
 
@@ -22,31 +24,37 @@ const CreateUser = () => {
         email,
         password,
       });
-      console.log('Kullanıcı başarıyla oluşturuldu:', response.data);
+      console.log('User created successfully:', response.data);
 
-      // Formu sıfırla
+      // Show success notification
+      toast.success('User created successfully!');
+
+      // Reset the form
       setName('');
       setEmail('');
       setPassword('');
-      setErrorMessage(''); // Hata mesajını sıfırla
+      setErrorMessage(''); // Reset error message
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        setErrorMessage('Bu email ile kayıtlı kullanıcı zaten var.');
+        setErrorMessage('A user with this email already exists.');
+        toast.error('A user with this email already exists.');
       } else {
-        setErrorMessage('Kullanıcı oluşturulurken hata oluştu.');
+        setErrorMessage('An error occurred while creating the user.');
+        toast.error('An error occurred while creating the user.');
       }
-      console.error('Kullanıcı oluşturulurken hata oluştu:', error);
+      console.error('An error occurred while creating the user:', error);
     }
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-4 text-primary">Kullanıcı Oluştur</h1>
+      <ToastContainer />
+      <h1 className="text-4xl font-bold mb-4 text-primary">Create User</h1>
       {errorMessage && <div className="text-error mb-4">{errorMessage}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Ad Soyad</span>
+            <span className="label-text">Full Name</span>
           </label>
           <input
             type="text"
@@ -68,7 +76,7 @@ const CreateUser = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Şifre</span>
+            <span className="label-text">Password</span>
           </label>
           <input
             type="password"
@@ -78,7 +86,7 @@ const CreateUser = () => {
           />
         </div>
         <button type="submit" className="btn btn-primary mt-4">
-          Oluştur
+          Create
         </button>
       </form>
     </div>
