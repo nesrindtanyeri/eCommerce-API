@@ -20,20 +20,20 @@ const CreateProduct = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3000/products', form);
-      console.log('Yeni Ürün Oluşturuldu:', response.data);
-      // Başarılı bir şekilde ürün oluşturulduktan sonra formu temizle
+      console.log('Product successfully created:', response.data);
+      // Clear the form after successful creation
       setForm({ name: '', description: '', price: '' });
     } catch (error) {
-      console.error('Ürün oluşturulurken hata oluştu:', error);
+      console.error('Error occurred while creating product:', error);
     }
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4 text-primary">Yeni Ürün Oluştur</h1>
+      <h1 className="text-2xl font-bold mb-4 text-primary">Create New Product</h1>
       <form onSubmit={handleSubmit} className="bg-neutral p-6 rounded-md shadow-md">
         <div className="mb-4">
-          <label className="block text-secondary font-semibold mb-2">Ürün Adı</label>
+          <label className="block text-secondary font-semibold mb-2">Product Name</label>
           <input
             type="text"
             name="name"
@@ -43,7 +43,7 @@ const CreateProduct = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-secondary font-semibold mb-2">Açıklama</label>
+          <label className="block text-secondary font-semibold mb-2">Description</label>
           <textarea
             name="description"
             value={form.description}
@@ -52,7 +52,7 @@ const CreateProduct = () => {
           ></textarea>
         </div>
         <div className="mb-4">
-          <label className="block text-secondary font-semibold mb-2">Fiyat</label>
+          <label className="block text-secondary font-semibold mb-2">Price</label>
           <input
             type="number"
             name="price"
@@ -65,7 +65,7 @@ const CreateProduct = () => {
           type="submit"
           className="bg-primary text-white px-6 py-2 rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-accent"
         >
-          Oluştur
+          Create
         </button>
       </form>
     </div>

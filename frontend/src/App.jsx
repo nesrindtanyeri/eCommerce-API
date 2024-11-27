@@ -4,12 +4,12 @@ import Home from './pages/Home';
 import CreateUser from './pages/CreateUser';
 import UserList from './pages/UserList';
 import CreateProduct from './pages/CreateProduct';
+import UpdateProduct from './pages/UpdateProduct';
 
 const App = () => {
   return (
     <Router>
       <div className="container mx-auto p-4">
-        {/* Top Menu */}
         <nav className="navbar bg-base-100 shadow-lg rounded-lg mb-8">
           <div className="flex-1">
             <Link to="/" className="btn btn-ghost normal-case text-xl text-primary">Home</Link>
@@ -35,6 +35,7 @@ const App = () => {
           <Route path="/create-user" element={<CreateUser />} />
           <Route path="/user-list" element={<UserList />} />
           <Route path="/create-product" element={<CreateProduct />} />
+          <Route path="/update-product/:id" element={<UpdateProduct />} />
         </Routes>
       </div>
     </Router>

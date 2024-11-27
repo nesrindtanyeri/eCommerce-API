@@ -10,18 +10,26 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
+    pool: {
+      max: 5, // Maximum number of connections in the pool
+      min: 0, // Minimum number of connections in the pool
+      acquire: 30000, // Maximum time in ms that a connection can be idle before being released
+      idle: 10000, // Maximum time in ms that pool will try to get a connection before throwing error
+    },
+    logging: console.log, // Logs all queries (useful for debugging; remove in production)
   }
 );
 
-// connect to the database
+// Connect to the database
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Veritabanına başarıyla bağlanıldı.');
+    console.log('Successfully connected to the database.');
   })
   .catch((err) => {
-    console.error('Veritabanına bağlanılamadı:', err);
+    console.error('Unable to connect to the database:', err);
   });
 
 export default sequelize;
+
 
